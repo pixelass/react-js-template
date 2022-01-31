@@ -36,7 +36,6 @@ jobs:
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
-            ${{ github.workspace }}/.next/cache
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
       - name: Install dependencies
@@ -46,7 +45,7 @@ jobs:
         run: npm run lint
 
       - name: Build before e2e tests
-        run: npm run build:dev
+        run: npm run build
 
       - name: Run all tests
         run: npm test

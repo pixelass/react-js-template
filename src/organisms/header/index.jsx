@@ -1,12 +1,12 @@
-import Link from "next/link";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 	return (
 		<header>
 			<nav data-test-id="navigation">
-				<Link href="/">Home</Link>
-				<Link href="/about">About me</Link>
+				<Link to="/">Home</Link>
+				<Link to="/about">About me</Link>
 			</nav>
 		</header>
 	);
