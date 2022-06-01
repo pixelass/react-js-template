@@ -10,19 +10,19 @@ expected outcomes.
 ## Gherkin
 
 [Cucumber](https://cucumber.io/) uses
-[Gherkin](<https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language>) to define test cases.
+[Gherkin](https://en.wikipedia.org/wiki/Cucumber_(software)#Gherkin_language) to define test cases.
 Its syntax centers around a line-oriented design, similar to that of Python.
 
 ### Example
 
 ```gherkin
 Scenario: Eric wants to withdraw money from his bank account at an ATM
-	Given Eric has a valid Credit or Debit card
-	And his account balance is $100
-	When he inserts his card
-	And withdraws $45
-	Then the ATM should return $45
-	And his account balance is $55
+Given Eric has a valid Credit or Debit card
+And his account balance is $100
+When he inserts his card
+And withdraws $45
+Then the ATM should return $45
+And his account balance is $55
 ```
 
 ## Best practices
@@ -36,14 +36,10 @@ various tests.
 **Example:** `/cypress/integration/common/steps.js`
 
 ```js
-// helpers/index.js
-// export const pages = {
-//   root: "/",
-//   about: "/about",
-// };
+import { When } from "cypress-cucumber-preprocessor/steps";
 
-Given(/^the user is on the "([^"]*)" page$/, function (page) {
-  cy.visit(pages[page]);
+When(/^the user is on the root page$/, function () {
+  cy.visit("/");
 });
 ```
 
@@ -55,27 +51,19 @@ We write easy to understand, testable features.
 1. Define a `Scenario` as often as given
 1. Describe the expected behavior
 
-**Example:** `/cypress/integration/Navigation.feature`
+**Example:** `/cypress/integration/Load.feature`
 
 ```gherkin
-Feature: Navigation
+Feature: Load
 
   As a user,
-  I want a navigation,
-  so that I can navigate the app.
+  I want to see the page,
+  so that I can use the app.
 
-  Scenario: The user wants to navigate to the about page
+  Scenario: The user wants to see the page
 
-    Given the user is on the "root" page
-    When the user clicks on "About" in the navigation
-    Then the "about" page is visible
-
-  Scenario: The user wants to navigate to the root page
-
-    Given the user is on the "about" page
-    When the user clicks on "Home" in the navigation
-    Then the "root" page is visible
-
+    When the user is on the root page
+    Then the page is displayed
 ```
 
 The keywords `And` and `But` are syntactic sugar for `Given`, `When` and `Then`. They should not be
@@ -86,29 +74,21 @@ We separate steps and assertions:
 **Example:** `/cypress/integration/common/steps.js`
 
 ```js
-import { Given, When } from "cypress-cucumber-preprocessor/steps";
-import { pages, dataTestId } from "../helpers";
+import { When } from "cypress-cucumber-preprocessor/steps";
 
-Given(/^the user is on the "([^"]*)" page$/, function (page) {
-  cy.visit(pages[page]);
+When(/^the user is on the root page$/, function () {
+  cy.visit("/");
 });
-
-When(/^the user clicks on "([^"]*)" in the navigation$/, function (text) {
-  cy.get(dataTestId("navigation")).find("a").contains(text).click();
-});
-
 ```
 
 **Example:** `/cypress/integration/common/assertions.js`
 
 ```js
 import { Then } from "cypress-cucumber-preprocessor/steps";
-import { pages } from "../helpers";
 
-Then(/^the "([^"]*)" page is visible$/, function (page) {
-  cy.url().should("include", pages[page]);
+Then(/^the page is displayed$/, function () {
+  cy.get("#root").should("exist");
 });
-
 ```
 
 ### Test selectors

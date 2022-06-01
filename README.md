@@ -1,9 +1,22 @@
 # React App
 
-This is a template for a React.js app.
+This is a template for a [Create React App](https://create-react-app.dev/) with additional tools.
+
+<!-- toc -->
+
+- [Tech-Stack](#tech-stack)
+- [Getting started](#getting-started)
+- [Behavior Driven Development](#behavior-driven-development)
+- [Test Driven Development](#test-driven-development)
+- [Commitlint](#commitlint)
+- [Commands](#commands)
+- [Skipping linters](#skipping-linters)
+
+<!-- tocstop -->
 
 It uses the following tools/libraries:
 
+## Tech-Stack
 * [Storybook](https://storybook.js.org/)
 * [Cypress](https://cypress.io/)
 * [Jest](https://jestjs.io/)
@@ -25,12 +38,6 @@ npm run dev
 ```shell
 npm run storybook
 ```
-
-
-## Atomic design
-
-We use atomic design. You can read more about our decision in the
-[documentation](./docs/ATOMIC_DESIGN.md).
 
 ## Behavior Driven Development
 

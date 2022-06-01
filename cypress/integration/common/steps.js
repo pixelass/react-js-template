@@ -1,10 +1,6 @@
-import { Given, When } from "cypress-cucumber-preprocessor/steps";
-import { pages, dataTestId } from "../helpers";
+/* global cy */
+import {When} from 'cypress-cucumber-preprocessor/steps';
 
-Given(/^the user is on the "([^"]*)" page$/, function (page) {
-	cy.visit(pages[page]);
-});
-
-When(/^the user clicks on "([^"]*)" in the navigation$/, function (text) {
-	cy.get(dataTestId("navigation")).find("a").contains(text).click();
+When(/^the user is on the root page$/, function () {
+	cy.visit('/');
 });
