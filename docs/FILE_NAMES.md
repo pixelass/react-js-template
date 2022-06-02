@@ -24,7 +24,6 @@ utils
 * `MyComponent.stories.js`: The story for this component
 * `MyComponent.{spec,test}.js`: The tests for this component or function
 * `index.js`: the main component (`export default`)
-* `index.js`: the main component (`export default`)
 * `styled.js`: local styled components
 * `[*].js`: add more files in case you need them
   * i.e. `constants.{js,json}`
