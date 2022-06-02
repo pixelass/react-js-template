@@ -60,12 +60,12 @@ Example 1: (gherkin)
 
 Scenario: The user wants to access their account
 
-	Given the user has an account
-	And the user is on the sign-in page
+  Given the user has an account
+  And the user is on the sign-in page
 
-	When the user enters their credentials
-	And the user submits the form
-	Then the user sees their profile
+  When the user enters their credentials
+  And the user submits the form
+  Then the user sees their profile
 
 Example 2: (checklist)
 
