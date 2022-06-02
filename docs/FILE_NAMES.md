@@ -1,37 +1,55 @@
 # File names
 
-In order to optimize for smaller bundles and easier to understand we separate certain parts from
-each other.
+In order to optimize for smaller bundles and reduce the filesize we can split a file into smaller
+files. We also separate tests and stories from the actual components or functions.
 
 ## Example
 
 ```
-atoms
-   ┣━ my-component
-   ┃  ┣━ constants.js
-   ┃  ┣━ index.jsx
-   ┃  ┣━ styled.js
-   ┃  ┣━ styles.js 
-   ┃  ┣━ types.js
-   ┃  ┣━ utils.js
-   ┃  ┗━ [*].js
-   ┗━ ...
+components
+   ┣━ Button
+   ┃  ┣━ Button.stories.js
+   ┃  ┣━ Button.{spec,test}.js
+   ┃  ┣━ index.js
+   ┃  ┣━ styled.js (optional)
+   ┃  ┗━ *.js
+   ┣━ Header.js
+   ┗━ …
+utils
+   ┣━ unit.js
+   ┣━ unit.spec.js
+   ┗━ …
 ```
 
-* `constants.js`: local constants
-* `index.jsx`: the main component (`export default`)
-* `styled.js`: styled components via `import styled from "@emotion/styled"`
-* `styles.js`: styles  via `import {css} from "@emotion/react"`
-* `utils.js`: local utility functions
-* `[*].ts`: add more files in case you need them
-  * i.e. `items.{js,json}`
+* `MyComponent.stories.js`: The story for this component
+* `MyComponent.{spec,test}.js`: The tests for this component or function
+* `index.js`: the main component (`export default`)
+* `index.js`: the main component (`export default`)
+* `styled.js`: local styled components
+* `[*].js`: add more files in case you need them
+  * i.e. `constants.{js,json}`
   
 ## Exports
 
-We use named exports in all files except for the `index.jsx`.
-We need to use `export default` to allow better DX when using components in dynamic imports
+We use named exports in all files except for the `index.js` in.
+We prefer `export default` to allow better developer experience when using components with dynamic
+imports.
 
-## File extension
+## Naming Pattern
 
-Use `.jsx` if your file contains JSX. In all other cases use `.js` (or `.json` when applicable) 
+### Components
+
+Component files start with an uppercase letter (i.e. `Button.js`).  
+If the components also has tests and/or stories or additional related files we move it into a
+folder (i.e `Button/index.js`)
+
+### Pages
+
+Pages should start with a lowercase letter (i.e. `about.js`)
+
+### Utilities and other functions
+
+Functions should start with a lowercase letter (i.e. `unit.js`)
+
+
 

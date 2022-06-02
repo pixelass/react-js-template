@@ -7,7 +7,7 @@ tackle these challenges.
 ## KISS
 
 We follow the [KISS principle](https://en.wikipedia.org/wiki/KISS_principle). This also counts for
-state handling. Over the past years many great concepts have been published. We found 
+state handling. Over the past years many great concepts have been published. We found
 [this article](https://flutter.dev/docs/development/data-and-backend/state-mgmt/options) very
 helpful, when making decisions and designing our state management strategy.
 
@@ -24,8 +24,8 @@ Step 1: Adding a local state
 In this example we can see how we can intuitively add a local state to a checkbox and make use of
 it.
 
-```tsx
-import React, { useState } from "react";
+```jsx
+import { useState } from "react";
 
 const Checkbox = () => {
 	const [checked, setChecked] = useState(false);
@@ -58,8 +58,8 @@ when we want to add a default state we can make use of React's
 [DOM API](https://reactjs.org/docs/uncontrolled-components.html#default-values). Let's add
 `defaultChecked` to our component properties.
 
-```tsx
-import React, { useState } from "react";
+```jsx
+import { useState } from "react";
 
 const Checkbox = ({ defaultChecked }) => {
 	const [checked, setChecked] = useState(defaultChecked);
@@ -92,12 +92,11 @@ Step 3: Allowing outside control
 When we build Software, we often want to have more control of our app's state. To allow this we can
 create a [controlled component](https://reactjs.org/docs/forms.html#controlled-components).
 
-Let's move our state to a 
-[Higher Order Component](https://reactjs.org/docs/higher-order-components.html). In our case this is
-the App.
+Let's [lift the state up](https://reactjs.org/docs/lifting-state-up.html). In our case the App will
+host the state.
 
-```tsx
-import React, { useState } from "react";
+```jsx
+import { useState } from "react";
 
 const Checkbox = ({ checked, onChange }) => {
 	return (
@@ -137,8 +136,8 @@ the [KISS principle](https://en.wikipedia.org/wiki/KISS_principle). To help us w
 machines, in our case we will add a [context](https://reactjs.org/docs/context.html) to provide the
 state of our feature.
 
-```tsx
-import React, {
+```jsx
+import {
 	createContext,
 	useCallback,
 	useContext,
@@ -163,14 +162,9 @@ const CheckpoxProvider = ({ children }) => {
 			setChecked((previousState) => !previousState);
 		}
 	}, []);
-	const context = useMemo(() => ({ checked, check, uncheck, toggle }), [
-		checked,
-		check,
-		uncheck,
-		toggle
-	]);
+    
 	return (
-		<CheckboxContext.Provider value={context}>
+		<CheckboxContext.Provider value={{ checked, check, uncheck, toggle }}>
 			{children}
 		</CheckboxContext.Provider>
 	);
@@ -229,12 +223,12 @@ We added a context and decided to define a small state machine `CheckboxProvider
 [hook](https://reactjs.org/docs/hooks-reference.html) to allow easy access to the machine.
 
 We provide three callbacks with "common names".
-```tsx
-	const on = useCallback(() => {
+```jsx
+	const activate = useCallback(() => {
 		/* activate */
 	}, []);
 
-	const off = useCallback(() => {
+	const deactivate = useCallback(() => {
 		/* deactivate */
 	}, []);
 	
@@ -249,11 +243,11 @@ We provide three callbacks with "common names".
 
 Common names allow us to easily understand how to operate different machines. We can also create the
 same machine to open or close a dialog, sidebar or similar. We would then use `open`, `close` and
-`toggle`. 
+`toggle`.
 
 When we want to operate several machines, we can simply rename the in our application or component.
 
-```tsx
+```jsx
 const {open: openModal, opened: isModalOpen} = useOpen();
 const {open: openDialog, opened: isDialogOpen} = useOpen();
 const {open: openSidebar, opened: isSidebarOpen} = useOpen();
@@ -265,25 +259,16 @@ in our case is a `boolean`. While we kept the previous examples simple and did n
 we could design our machines in the same way.
 
 This decision should be discussed with the team and then respected to keep the promise of "common"
-communication. Speaking different languages can major cause issues, a very good example is the
+communication. Speaking different languages can cause major issues, a very good example is the
 [Mars Climate Orbiter](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter) failure.
 
 > An investigation attributed the failure to a measurement mismatch between two software systems: metric units by NASA and non-metric (imperial or "English") units by spacecraft builder Lockheed Martin.
 
-As you might have noticed, we also memoize our context via
-[`useMemo`](https://reactjs.org/docs/hooks-reference.html#usememo). This is very important since
-[object in javascript are unique](https://dmitripavlutin.com/how-to-compare-objects-in-javascript/),
-they would therefore change on each rendering cycle. Instead of building our own comparison utility,
-we can make use of React's memoization helpers.
 
-```tsx
-const context = useMemo(() => ({ isOpen, open, close, toggle }), [
-	isOpen,
-	open,
-	close,
-	toggle
-]);
-```
+## Global states
+
+If you need to share a state with other components of your app it might be easier to use
+[Zustand](https://github.com/pmndrs/zustand) instead of a React context
 
 ## Build something awesome, build with conscience
 

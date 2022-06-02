@@ -1,6 +1,6 @@
-import { Then } from "cypress-cucumber-preprocessor/steps";
-import { pages } from "../helpers";
+/* global cy */
+import {Then} from 'cypress-cucumber-preprocessor/steps';
 
-Then(/^the "([^"]*)" page is visible$/, function (page) {
-	cy.url().should("include", pages[page]);
+Then(/^the page is displayed$/, function () {
+	cy.get('#root').should('exist');
 });
