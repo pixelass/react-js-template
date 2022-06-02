@@ -25,6 +25,47 @@ It uses the following tools/libraries:
 * [Eslint](https://eslint.org/)
 * [Prettier](https://prettier.io/)
 
+## Project Setup
+
+This project uses different deployments to make code reviews easier:
+
+* Vercel (App Production)
+* Vercel (App Preview)
+* GitHub Pages (Storybook Production)
+* Surge (Storybook Preview)
+
+### Set up Vercel
+
+Please follow this guide: https://vercel.com/docs/concepts/git
+
+### Setup GitHub Pages
+
+Please follow this guide: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+
+Use the `gh-pages` branch
+
+### Setup Surge
+
+To generate a surge token please use the following command
+
+```shell
+npx surge token
+```
+
+It will output something like this:
+
+```shell
+❯ npx surge token
+
+   1234567890abcdefghijklmnopqrstuv
+```
+
+Add this token to your [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) 
+
+We only need it for the "Preview" Environment, but you can add it to both (see screenshot below)
+
+![GitHub Secret for Surge](./docs/resources/github-secrets-surge.png)
+
 ## Getting started
 
 **Run the development server:**
