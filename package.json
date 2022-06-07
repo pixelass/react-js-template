@@ -5,54 +5,16 @@
   "license": "MIT",
   "scripts": {
     "build": "react-scripts build",
-    "cypress": "npx cypress open --browser=chrome --e2e",
-    "cypress:run": "npx cypress run --browser=chrome --e2e",
     "start": "vercel dev",
-    "jest": "react-scripts test --watchAll=false",
-    "jest:watch": "react-scripts test --watchAll",
-    "lint": "npm run eslint && npm run stylelint",
-    "eslint": "eslint '**/*.{js,jsx}'",
-    "eslint:fix": "npm run eslint -- --fix",
     "prepare": "npx husky install",
-    "stylelint": "npx stylelint src/{**/*,*}.{css,js,jsx}",
-    "storybook": "start-storybook -p 6006 -s public",
-    "storybook:build":"build-storybook -s public",
-    "test:e2e": "npx start-server-and-test start http://localhost:3000 cypress:run",
-    "test:unit": "npm run jest",
-    "test": "npm run test:unit && npm run test:e2e",
     "toc": "npx markdown-toc@1 README.md -i"
   },
   "dependencies": {
-    "axios": "0.27.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-helmet": "6.1.0",
-    "react-router-dom": "6.3.0",
-    "styled-components": "5.3.5",
-    "nanoid": "3.3.4",
-    "zustand": "4.0.0-rc.1"
+    "styled-components": "5.3.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.0.2",
-    "@commitlint/config-conventional": "^17.0.2",
-    "@emotion/babel-plugin": "^11.9.2",
-    "@jest/globals": "^28.1.0",
-    "@mdx-js/react": "^2.1.1",
-    "@storybook/addon-actions": "^6.5.6",
-    "@storybook/addon-essentials": "^6.5.6",
-    "@storybook/addon-interactions": "^6.5.6",
-    "@storybook/addon-links": "^6.5.6",
-    "@storybook/builder-webpack5": "^6.5.6",
-    "@storybook/manager-webpack5": "^6.5.6",
-    "@storybook/node-logger": "^6.5.6",
-    "@storybook/preset-create-react-app": "^4.1.2",
-    "@storybook/react": "^6.5.6",
-    "@storybook/testing-library": "^0.0.11",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.0",
-    "cypress-cucumber-preprocessor": "^4.3.1",
-    "cypress": "^10.0.0",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^7.0.1",
@@ -61,9 +23,6 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-storybook": "^0.5.12",
     "eslint-plugin-unicorn": "^42.0.0",
-    "jest": "^28.1.0",
-    "jest-config": "^28.1.0",
-    "jest-environment-jsdom": "^28.1.0",
     "lint-staged": "^13.0.0",
     "postcss-syntax": "^0.36.2",
     "prettier": "^2.6.2",
@@ -77,23 +36,5 @@
     "stylelint-order": "^4.1.0",
     "stylelint-processor-styled-components": "^1.10.0",
     "vercel": "^24.2.5"
-  },
-  "overrides": {
-    "react-refresh": "0.11.0"
-  },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
-  },
-  "eslintConfig": {
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
   }
 }
